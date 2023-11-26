@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:weather_app/src/core/animation/animation.dart';
 import 'package:weather_app/src/core/constants/constants.dart';
@@ -15,7 +16,7 @@ class LocationAddButton extends StatelessWidget {
     return ShrinkButton(
       onPressed: () => onPressed(context),
       child: Container(
-        height: 59.0,
+        height: 54.w,
         margin: AppPadding.cardMargin,
         decoration: AppDecoration.previewCard,
         child: Center(
@@ -69,7 +70,7 @@ class _SearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 56.0,
+      height: 55.w,
       padding: AppPadding.main,
       color: AppColor.white.withOpacity(0.2),
       child: Row(

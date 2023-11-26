@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/src/core/animation/animation.dart';
 import 'package:weather_app/src/core/constants/constants.dart';
@@ -55,7 +56,7 @@ class _SearchPageBody extends StatelessWidget {
               const LocationAddButton(),
             ],
           ),
-          top: Container(decoration: AppDecoration.scroll, height: 50.0),
+          top: Container(decoration: AppDecoration.scroll, height: 50.h),
         ),
       );
     });

@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
               ] else if (state is WeatherBlocFailure)
                 Align(
                   alignment: Alignment.center,
-                  child: Text('Error', style: AppTextStyle.style4),
+                  child: Text(state.msg, style: AppTextStyle.style4),
                 )
               else
                 Center(
