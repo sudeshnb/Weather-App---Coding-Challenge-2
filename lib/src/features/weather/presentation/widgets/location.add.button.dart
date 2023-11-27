@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:weather_app/src/core/animation/animation.dart';
 import 'package:weather_app/src/core/constants/constants.dart';
 import 'package:weather_app/src/features/weather/presentation/cubit/search.dart';
-import '../bloc/weather/bloc.dart';
 import '../cubit/save.location.dart';
 
 class LocationAddButton extends StatelessWidget {
@@ -122,7 +121,6 @@ class _SearchBody extends StatelessWidget {
   }
 
   void onPressed(BuildContext context, String cityName) {
-    context.read<WeatherBlocBloc>().add(CityWeather(cityName));
     context.read<SaveLocationCubic>().searchCity(cityName);
     Navigator.pop(context);
   }

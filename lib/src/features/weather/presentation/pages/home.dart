@@ -9,6 +9,7 @@ import 'package:weather_app/src/core/utils/value.dart';
 import 'package:weather_app/src/features/weather/domain/entities/weather.dart';
 import 'package:weather_app/src/features/weather/presentation/cubit/image.dart';
 import 'package:weather_app/src/features/weather/presentation/widgets/background.dart';
+import '../bloc/load/bloc.dart';
 import '../bloc/weather/bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -196,28 +197,40 @@ class _HomePageAppBar extends StatelessWidget {
   final Weather weather;
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: const Alignment(0, -0.78),
-      child: Padding(
-        padding: AppPadding.main,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
+    return BlocBuilder<MainBloc, MainState>(
+      builder: (builder, state) {
+        return Align(
+          alignment: const Alignment(0, -0.78),
+          child: Padding(
+            padding: AppPadding.main,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(Icons.pin_drop, color: AppColor.white),
-                const SizedBox(width: 5.0),
-                Text(weather.areaName ?? '', style: AppTextStyle.style7),
+                Row(
+                  children: [
+                    if (state is MainSuccess)
+                      ShrinkButton(
+                        onPressed: () => context.read<WeatherBlocBloc>().add(
+                              FetchWeather(state.position),
+                            ),
+                        child: Icon(Icons.pin_drop, color: AppColor.white),
+                      )
+                    else
+                      Icon(Icons.pin_drop, color: AppColor.white),
+                    AppSpace.w10,
+                    Text(weather.areaName ?? '', style: AppTextStyle.style7),
+                  ],
+                ),
+                ShrinkButton(
+                  onPressed: () =>
+                      Navigator.restorablePushNamed(context, RoutesName.search),
+                  child: SvgPicture.asset(AppIcons.menu),
+                ),
               ],
             ),
-            ShrinkButton(
-              onPressed: () =>
-                  Navigator.restorablePushNamed(context, RoutesName.search),
-              child: SvgPicture.asset(AppIcons.menu),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
@@ -233,15 +246,16 @@ class BackGroundImage extends StatelessWidget {
         builder: (context, state) {
           return Stack(
             children: [
-              CachedNetworkImage(
-                imageUrl: state.imageUrl,
-                placeholder: (context, url) =>
-                    const Shimmer(child: _ImageBox()),
-                errorWidget: (context, url, error) => const SizedBox(),
-                imageBuilder: (context, img) {
-                  return _ImageBox(image: img);
-                },
-              ),
+              if (state.imageUrl.isNotEmpty)
+                CachedNetworkImage(
+                  imageUrl: state.imageUrl,
+                  placeholder: (context, url) =>
+                      const Shimmer(child: _ImageBox()),
+                  errorWidget: (context, url, error) => const SizedBox(),
+                  imageBuilder: (context, img) {
+                    return _ImageBox(image: img);
+                  },
+                ),
               Container(
                 color: AppColor.black.withOpacity(0.6),
               )
