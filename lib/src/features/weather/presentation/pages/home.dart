@@ -46,60 +46,90 @@ class HomePage extends StatelessWidget {
         _HomePageAppBar(weather: model.current),
         Align(
           alignment: const Alignment(0, -0.58),
-          child: Text(
-            AppValue.mount(model.current),
-            style: AppTextStyle.style11,
+          child: OpacityTranslateAnimation(
+            duration: const Duration(milliseconds: 2000),
+            child: Text(
+              AppValue.mount(model.current),
+              style: AppTextStyle.style11,
+            ),
           ),
         ),
         Align(
           alignment: const Alignment(0, -0.45),
-          child: Text(
-            'Updated as of ${AppValue.update(model.current)}',
-            style: AppTextStyle.style4,
+          child: OpacityTranslateAnimation(
+            duration: const Duration(milliseconds: 2500),
+            child: Text(
+              'Updated as of ${AppValue.update(model.current)}',
+              style: AppTextStyle.style4,
+            ),
           ),
         ),
         Align(
           alignment: const Alignment(0, -0.3),
-          child: SvgPicture.asset(AppValue.getWeatherIcon(model.current)),
+          child: TranslateUpAnimation(
+            duration: const Duration(milliseconds: 1500),
+            child: OpacityTranslateAnimation(
+              duration: const Duration(milliseconds: 3500),
+              child: SvgPicture.asset(
+                AppValue.getWeatherIcon(model.current),
+              ),
+            ),
+          ),
         ),
         Align(
           alignment: const Alignment(0, -0.1),
-          child: Text(model.current.weatherMain!, style: AppTextStyle.style12),
+          child: TranslateUpAnimation(
+            duration: const Duration(milliseconds: 2000),
+            child: OpacityTranslateAnimation(
+              duration: const Duration(milliseconds: 3500),
+              child:
+                  Text(model.current.weatherMain!, style: AppTextStyle.style12),
+            ),
+          ),
         ),
         Align(
           alignment: const Alignment(0, 0.08),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                AppValue.celsius(model.current),
-                style: AppTextStyle.style14,
+          child: OpacityTranslateAnimation(
+            duration: const Duration(milliseconds: 4500),
+            child: TranslateUpAnimation(
+              duration: const Duration(milliseconds: 2500),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppValue.celsius(model.current),
+                    style: AppTextStyle.style14,
+                  ),
+                  Text('ºC', style: AppTextStyle.style9)
+                ],
               ),
-              Text('ºC', style: AppTextStyle.style9)
-            ],
+            ),
           ),
         ),
         Align(
           alignment: const Alignment(0, 0.45),
-          child: Padding(
-            padding: AppPadding.main,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _details(
-                    title: 'HUMIDITY',
-                    value: AppValue.humidity(model.current),
-                    img: AppIcons.humidity),
-                _details(
-                    title: 'WIND',
-                    value: AppValue.speed(model.current),
-                    img: AppIcons.wind),
-                _details(
-                    title: 'FEELS LIKE',
-                    value: '${AppValue.celsius(model.current)}°C',
-                    img: AppIcons.feels),
-              ],
+          child: TranslateUpAnimation(
+            duration: const Duration(milliseconds: 3000),
+            child: Padding(
+              padding: AppPadding.main,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _details(
+                      title: 'HUMIDITY',
+                      value: AppValue.humidity(model.current),
+                      img: AppIcons.humidity),
+                  _details(
+                      title: 'WIND',
+                      value: AppValue.speed(model.current),
+                      img: AppIcons.wind),
+                  _details(
+                      title: 'FEELS LIKE',
+                      value: '${AppValue.celsius(model.current)}°C',
+                      img: AppIcons.feels),
+                ],
+              ),
             ),
           ),
         ),
@@ -126,20 +156,23 @@ class _NextWeekCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: const Alignment(0, 0.9),
-      child: Container(
-        height: 153.0,
-        padding: const EdgeInsets.all(16.0),
-        margin: AppPadding.main,
-        decoration: BoxDecoration(
-          color: AppColor.card.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(24.0),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: AppValue.getDates(forecast)
-              .map((e) => _nextWeekDetails(e))
-              .take(4)
-              .toList(),
+      child: TranslateUpAnimation(
+        duration: const Duration(milliseconds: 3500),
+        child: Container(
+          height: 153.0,
+          padding: const EdgeInsets.all(16.0),
+          margin: AppPadding.main,
+          decoration: BoxDecoration(
+            color: AppColor.card.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(24.0),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: AppValue.getDates(forecast)
+                .map((e) => _nextWeekDetails(e))
+                .take(4)
+                .toList(),
+          ),
         ),
       ),
     );
