@@ -23,6 +23,7 @@ class WeatherApp extends StatelessWidget {
         child: DismissKeyboard(
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
+            checkerboardRasterCacheImages: true,
             initialRoute: RoutesName.initial,
             onGenerateRoute: AppRoute.generate,
           ),
