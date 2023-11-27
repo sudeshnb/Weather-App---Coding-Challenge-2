@@ -30,7 +30,11 @@ class AppDecoration {
         color: AppColor.card.withOpacity(0.2),
         borderRadius: BorderRadius.circular(24.0),
       );
-
+  static BoxDecoration get previewDismissCard => BoxDecoration(
+        color: AppColor.red,
+        // backgroundBlendMode: BlendMode.clear,
+        borderRadius: BorderRadius.circular(24.0),
+      );
   static BoxDecoration get bottomSheet => BoxDecoration(
         borderRadius: BorderRadius.circular(24.0),
         gradient: LinearGradient(

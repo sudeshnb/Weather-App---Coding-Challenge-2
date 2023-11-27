@@ -39,8 +39,14 @@ class AreaModel {
         imageUrl:
             'https://images.unsplash.com/photo-1518873247959-ccfbaecd34d9?q=80&w=3328&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
     AreaEntity(
-        cityName: 'San Francisco',
-        imageUrl:
-            'https://images.unsplash.com/photo-1607624917259-5babcf84b2a1?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+      cityName: 'San Francisco',
+      imageUrl:
+          'https://images.unsplash.com/photo-1607624917259-5babcf84b2a1?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    ),
+    AreaEntity(
+      cityName: 'Colombo',
+      imageUrl:
+          'https://images.unsplash.com/photo-1607624917259-5babcf84b2a1?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    ),
   ];
 }

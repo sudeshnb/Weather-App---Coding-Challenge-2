@@ -30,4 +30,8 @@ class SaveLocationCubic extends Cubit<SaveLocationState> {
       (fail) => null,
     );
   }
+
+  Future<void> removeItem(Weather weather) async {
+    emit(SaveLocationState(list: [...state.list]..remove(weather)));
+  }
 }

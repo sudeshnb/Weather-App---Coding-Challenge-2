@@ -6,6 +6,8 @@ class AppColor {
   static Color black = const Color(0xFF000000);
   static Color white = const Color(0xFFFFFFFF);
 
+  static Color red = Colors.red;
+
   static Color card = const Color.fromRGBO(170, 165, 165, 0.7);
 
   static Color whiteText = const Color(0xFFECECEC);

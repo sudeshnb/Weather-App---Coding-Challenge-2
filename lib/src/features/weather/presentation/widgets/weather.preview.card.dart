@@ -7,20 +7,39 @@ import 'package:weather_app/src/core/constants/constants.dart';
 import 'package:weather_app/src/core/utils/value.dart';
 
 import '../bloc/weather/bloc.dart';
+import '../cubit/save.location.dart';
 
 class WeatherPreviewCard extends StatelessWidget {
   const WeatherPreviewCard({super.key, required this.weather});
   final Weather weather;
   @override
   Widget build(BuildContext context) {
-    return ShrinkButton(
-      onPressed: () => onPressed(context),
-      child: Container(
-        height: 153.0,
-        padding: AppPadding.card,
-        margin: AppPadding.cardMargin,
-        decoration: AppDecoration.previewCard,
-        child: _cardBody(),
+    return Padding(
+      padding: AppPadding.cardMargin,
+      child: Dismissible(
+        key: Key(weather.hashCode.toString()),
+        direction: DismissDirection.endToStart,
+        background: Container(
+          height: 153.0,
+          padding: AppPadding.card,
+          clipBehavior: Clip.hardEdge,
+          decoration: AppDecoration.previewDismissCard,
+          alignment: Alignment.centerRight,
+          child: Text('Delete', style: AppTextStyle.style5),
+        ),
+        onDismissed: (direction) {
+          context.read<SaveLocationCubic>().removeItem(weather);
+        },
+        child: ShrinkButton(
+          onPressed: () => onPressed(context),
+          child: Container(
+            height: 153.0,
+            padding: AppPadding.card,
+            clipBehavior: Clip.hardEdge,
+            decoration: AppDecoration.previewCard,
+            child: _cardBody(),
+          ),
+        ),
       ),
     );
   }

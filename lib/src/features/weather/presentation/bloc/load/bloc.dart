@@ -17,6 +17,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       emit(const MainFailure('Location services are disabled.'));
+      return;
     }
 
     permission = await Geolocator.checkPermission();
@@ -24,6 +25,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         emit(const MainFailure('Location permissions are denied'));
+        return;
       }
     }
 
@@ -33,9 +35,11 @@ class MainBloc extends Bloc<MainEvent, MainState> {
         const MainFailure(
             'Location permissions are permanently denied, we cannot request permissions.'),
       );
+      return;
     }
 
     final position = await Geolocator.getCurrentPosition();
     emit(MainSuccess(position: position));
+    return;
   }
 }
