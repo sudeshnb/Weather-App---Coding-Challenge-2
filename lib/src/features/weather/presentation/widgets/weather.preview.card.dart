@@ -5,7 +5,6 @@ import 'package:weather/weather.dart';
 import 'package:weather_app/src/core/animation/animation.dart';
 import 'package:weather_app/src/core/constants/constants.dart';
 import 'package:weather_app/src/core/utils/value.dart';
-
 import '../bloc/weather/bloc.dart';
 import '../cubit/save.location.dart';
 
@@ -19,14 +18,7 @@ class WeatherPreviewCard extends StatelessWidget {
       child: Dismissible(
         key: Key(weather.hashCode.toString()),
         direction: DismissDirection.endToStart,
-        background: Container(
-          height: 153.0,
-          padding: AppPadding.card,
-          clipBehavior: Clip.hardEdge,
-          decoration: AppDecoration.previewDismissCard,
-          alignment: Alignment.centerRight,
-          child: Text('Delete', style: AppTextStyle.style5),
-        ),
+        background: dismissibleBackground(),
         onDismissed: (direction) {
           context.read<SaveLocationCubic>().removeItem(weather);
         },
@@ -41,6 +33,17 @@ class WeatherPreviewCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Container dismissibleBackground() {
+    return Container(
+      height: 153.0,
+      padding: AppPadding.card,
+      clipBehavior: Clip.hardEdge,
+      decoration: AppDecoration.previewDismissCard,
+      alignment: Alignment.centerRight,
+      child: Text('Delete', style: AppTextStyle.style5),
     );
   }
 
