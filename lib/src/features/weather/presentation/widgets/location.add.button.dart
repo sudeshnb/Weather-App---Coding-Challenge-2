@@ -36,6 +36,7 @@ class LocationAddButton extends StatelessWidget {
   void onPressed(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.transparent,
       builder: (builder) => const SearchLocationBottomSheet(),
     );
   }
