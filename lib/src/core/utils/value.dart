@@ -17,9 +17,9 @@ class AppValue {
     return newList;
   }
 
-  static String getWeatherIcon(Weather code) {
-    if (code.weatherConditionCode == null) return AppIcons.image1;
-    switch (code.weatherConditionCode!) {
+  static String getWeatherIcon(int? code) {
+    if (code == null) return AppIcons.image1;
+    switch (code) {
       case >= 200 && < 300:
         return AppIcons.image3;
       case >= 300 && < 400:
@@ -51,14 +51,14 @@ class AppValue {
     return '';
   }
 
-  static String speed(Weather value) {
-    if (value.windSpeed == null) return '';
-    return ' ${value.windSpeed!.toStringAsFixed(1)}km/h';
+  static String speed(double? value) {
+    if (value == null) return '';
+    return ' ${value.toStringAsFixed(1)}km/h';
   }
 
-  static String humidity(Weather value) {
-    if (value.humidity == null) return '';
-    return ' ${value.humidity!.round()}%';
+  static String humidity(double? value) {
+    if (value == null) return '';
+    return ' ${value.round()}%';
   }
 
   static String mount(Weather value) {

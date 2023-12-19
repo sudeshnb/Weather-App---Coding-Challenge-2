@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:weather/weather.dart';
 import 'package:weather_app/src/core/animation/animation.dart';
 import 'package:weather_app/src/core/constants/constants.dart';
 import 'package:weather_app/src/core/utils/value.dart';
+import 'package:weather_app/src/features/weather/data/models/models.dart';
 import '../bloc/weather/bloc.dart';
 import '../cubit/save.location.dart';
 
 class WeatherPreviewCard extends StatelessWidget {
   const WeatherPreviewCard({super.key, required this.weather});
-  final Weather weather;
+  final SaveLocation weather;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -48,7 +48,7 @@ class WeatherPreviewCard extends StatelessWidget {
   }
 
   void onPressed(BuildContext context) {
-    context.read<WeatherBlocBloc>().add(CityWeather(weather.areaName!));
+    context.read<WeatherBlocBloc>().add(CityWeather(weather.areaName));
     Navigator.pop(context);
   }
 
@@ -77,11 +77,11 @@ class WeatherPreviewCard extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SvgPicture.asset(AppValue.getWeatherIcon(weather)),
+        SvgPicture.asset(AppValue.getWeatherIcon(weather.code)),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(AppValue.celsius(weather), style: AppTextStyle.style13),
+            Text(weather.temp.round().toString(), style: AppTextStyle.style13),
             Text('ºC', style: AppTextStyle.style8),
           ],
         ),
@@ -95,7 +95,8 @@ class WeatherPreviewCard extends StatelessWidget {
         children: [
           TextSpan(text: 'Wind', style: AppTextStyle.style6),
           TextSpan(
-              text: AppValue.speed(weather), style: AppTextStyle.defaultStyle),
+              text: AppValue.speed(weather.wind),
+              style: AppTextStyle.defaultStyle),
         ],
       ),
     );
@@ -107,7 +108,7 @@ class WeatherPreviewCard extends StatelessWidget {
         children: [
           TextSpan(text: 'Humidity', style: AppTextStyle.style6),
           TextSpan(
-              text: AppValue.humidity(weather),
+              text: AppValue.humidity(weather.humidity),
               style: AppTextStyle.defaultStyle),
         ],
       ),

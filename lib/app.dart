@@ -14,7 +14,7 @@ class WeatherApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (create) => WeatherBlocBloc()),
-        BlocProvider(create: (create) => SaveLocationCubic()),
+        BlocProvider(create: (create) => SaveLocationCubic()..init()),
       ],
       child: const ScreenUtilInit(
         designSize: Size(360, 690),

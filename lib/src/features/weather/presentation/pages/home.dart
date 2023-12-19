@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
             child: OpacityTranslateAnimation(
               duration: const Duration(milliseconds: 3500),
               child: SvgPicture.asset(
-                AppValue.getWeatherIcon(model.current),
+                AppValue.getWeatherIcon(model.current.weatherConditionCode),
               ),
             ),
           ),
@@ -119,11 +119,11 @@ class HomePage extends StatelessWidget {
                 children: [
                   _details(
                       title: 'HUMIDITY',
-                      value: AppValue.humidity(model.current),
+                      value: AppValue.humidity(model.current.humidity),
                       img: AppIcons.humidity),
                   _details(
                       title: 'WIND',
-                      value: AppValue.speed(model.current),
+                      value: AppValue.speed(model.current.windSpeed),
                       img: AppIcons.wind),
                   _details(
                       title: 'FEELS LIKE',
@@ -184,7 +184,7 @@ class _NextWeekCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(AppValue.day(weather), style: AppTextStyle.style3),
-        SvgPicture.asset(AppValue.getWeatherIcon(weather)),
+        SvgPicture.asset(AppValue.getWeatherIcon(weather.weatherConditionCode)),
         Text('${AppValue.celsius(weather)}°', style: AppTextStyle.defaultStyle),
         Text(AppValue.windSpeed(weather), style: AppTextStyle.style1),
       ],

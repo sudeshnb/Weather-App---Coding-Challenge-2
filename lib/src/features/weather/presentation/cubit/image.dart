@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/src/features/weather/data/models/models.dart';
+import 'package:weather_app/src/features/weather/data/sources/demo.dart';
 
 class ImageState extends Equatable {
   final String imageUrl;
